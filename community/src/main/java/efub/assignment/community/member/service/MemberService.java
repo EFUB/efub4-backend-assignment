@@ -1,10 +1,11 @@
 package efub.assignment.community.member.service;
 
 import efub.assignment.community.member.domain.Member;
-import efub.assignment.community.member.dto.GetMemberResponseDto;
+import efub.assignment.community.member.dto.MemberDetailsResponseDto;
 import efub.assignment.community.member.dto.MemberResponseDto;
 import efub.assignment.community.member.dto.MemberRequestDto;
 import efub.assignment.community.member.repository.MemberRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,11 @@ public class MemberService {
         return responseDto;
     }
 
-    public GetMemberResponseDto findMember(Long memberId){
+    public MemberDetailsResponseDto findMember(Long memberId){
         Member member = memberRepository.findById(memberId).orElseThrow(()->{
             throw new IllegalArgumentException("존재하지 않는 memberId입니다.");
         });
-        GetMemberResponseDto responseDto = GetMemberResponseDto.toDto(member);
+        MemberDetailsResponseDto responseDto = MemberDetailsResponseDto.toDto(member);
         return responseDto;
     }
 
@@ -49,8 +50,15 @@ public class MemberService {
         Member member = memberRepository.findById(memberId).orElseThrow(()->{
             throw new IllegalArgumentException("존재하지 않는 memberId입니다.");
         });
-        member.changeStatus();
+        member.deactivateAccount();
         memberRepository.save(member);
+    }
+
+    public Member findMemberByNickname(String nickname){
+        Member member = memberRepository.findByNickname(nickname).orElseThrow(()-> {
+                    throw new EntityNotFoundException(nickname + ": 존재하지 않는 회원입니다.");
+                });
+        return member;
     }
 
 }

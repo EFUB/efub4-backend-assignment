@@ -2,7 +2,8 @@
 
 ## 🧩 ERD
 
-<img width="1189" alt="image" src="https://github.com/crHwang0822/efub4-backend-assignment/assets/87927105/991dd7a1-4ca3-43f8-b31f-38535454fa28">
+![efub4th assignment](https://github.com/crHwang0822/efub4-backend-assignment/assets/87927105/611aa2f9-c3d6-4d39-a9fd-3bff3409a9da)
+
 
 
 ## 📗 API 문서
