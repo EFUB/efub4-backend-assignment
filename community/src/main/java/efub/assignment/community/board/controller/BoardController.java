@@ -35,17 +35,18 @@ public class BoardController {
 
     /* 게시판 수정 */
     @PatchMapping("/{boardId}")
-    public BoardResponseDto update(@PathVariable final Long boardId, @RequestBody @Valid final BoardUpdateRequestDto requestDto){
+    public BoardResponseDto update(@PathVariable final Long boardId,
+                                   @RequestBody @Valid final BoardUpdateRequestDto requestDto){
         Long id = boardService.update(boardId, requestDto);
         Board findBoard = boardService.findBoardById(id);
         return BoardResponseDto.from(findBoard);
-
     }
 
     /* 게시판 삭제 */
     @DeleteMapping("/{boardId}")
-    public String deleteBoard(@PathVariable(name = "boardId")Long id){
-        boardService.deleteBoard(id);
+    public String deleteBoard(@PathVariable(name = "boardId")Long id,
+                              @RequestParam(name = "memberId") Long memberId){ // requestparameter로 삭제하려는 사용자 id 받아옴 (권한 확인 위함)
+        boardService.deleteBoard(id, memberId);
         return "성공적으로 삭제되었습니다";
     }
 }

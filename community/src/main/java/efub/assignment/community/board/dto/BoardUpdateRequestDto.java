@@ -1,6 +1,8 @@
 package efub.assignment.community.board.dto;
 
 
+import efub.assignment.community.member.domain.Member;
+import efub.assignment.community.member.service.MemberService;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -11,11 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BoardUpdateRequestDto {
 
-    @NotBlank(message = "변경할 닉네임을 입력해주세요")
-    private String hostNickName;
+    @NotBlank(message = "현재 사용자의 Id를 입력해주세요")
+    private String memberId;
 
-    @Builder
-    public BoardUpdateRequestDto(String hostNickName){
-        this.hostNickName = hostNickName;
-    }
+    @NotBlank(message = "변경할 게시판 주인 Id를 입력해주세요")
+    private String newHostId;
+
 }
