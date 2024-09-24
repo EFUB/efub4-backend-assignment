@@ -30,7 +30,7 @@ public class BoardController {
         return BoardResponseDto.from(board, board.getAccount().getNickname());
     }
 
-    @PutMapping("/{board_id}")
+    @PatchMapping("/{board_id}")
     @ResponseStatus(value = HttpStatus.OK)
     public BoardResponseDto updateBoard(@PathVariable(name="board_id")Long board_id,
                                         @RequestBody @Valid final BoardUpdateDto dto){

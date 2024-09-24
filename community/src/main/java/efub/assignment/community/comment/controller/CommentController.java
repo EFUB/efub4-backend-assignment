@@ -21,7 +21,7 @@ public class CommentController {
     private final CommentHeartService commentHeartService;
 
     // 댓글 수정
-    @PutMapping
+    @PatchMapping
     public CommentResponseDto updateComment(@PathVariable(name = "commentId") Long id,
                                             @RequestBody @Valid final CommentRequestDto requestdto,
                                             @RequestParam(name = "accountId") Long accountId){
