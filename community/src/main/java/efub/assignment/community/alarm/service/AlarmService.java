@@ -25,6 +25,7 @@ public class AlarmService {
                 .createdDate(LocalDateTime.now())
                 .build();
         return alarmRepository.save(alarm);
+
     }
 
     public Alarm createMessageRoomAlarm() {

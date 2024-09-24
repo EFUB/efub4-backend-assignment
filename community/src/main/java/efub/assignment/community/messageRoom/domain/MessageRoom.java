@@ -59,8 +59,6 @@ public class MessageRoom extends BaseTimeEntity {
         }
         return null;
     }
-<<<<<<< HEAD
-=======
 
     public Message getLastMessage() {
         if (messageList.isEmpty()) {
@@ -68,5 +66,4 @@ public class MessageRoom extends BaseTimeEntity {
         }
         return messageList.get(messageList.size() - 1);
     }
->>>>>>> 93c92618c5b8794e53eba62e077404a3fb51181c
 }

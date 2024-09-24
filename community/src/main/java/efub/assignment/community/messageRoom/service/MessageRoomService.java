@@ -1,8 +1,6 @@
 package efub.assignment.community.messageRoom.service;
 
 import efub.assignment.community.alarm.service.AlarmService;
-import efub.assignment.community.exception.CustomException;
-import efub.assignment.community.exception.ErrorCode;
 import efub.assignment.community.member.domain.Member;
 import efub.assignment.community.member.service.MemberService;
 import efub.assignment.community.messageRoom.domain.MessageRoom;
@@ -14,6 +12,8 @@ import efub.assignment.community.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import efub.assignment.community.exception.CustomPermissionException;
+import efub.assignment.community.exception.ErrorCode;
 
 import java.util.List;
 
@@ -66,8 +66,8 @@ public class MessageRoomService {
     @Transactional
     public void deleteMessageRoom(Long messageRoomId, Long memberId) {
         MessageRoom messageRoom = findMessageRoomById(messageRoomId);
-        if(memberId != messageRoom.getReceiver().getMemberId() && memberId != messageRoom.getSender().getMemberId()) {
-            throw new CustomException(ErrorCode.PERMISSION_REJECTED_USER);
+        if(memberId!=messageRoom.getReceiver().getMemberId() && memberId!=messageRoom.getSender().getMemberId()) {
+            throw new CustomPermissionException(ErrorCode.PERMISSION_REJECTED_USER);
         }
         messageRoomRepository.delete(messageRoom);
     }

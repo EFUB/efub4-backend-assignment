@@ -1,7 +1,6 @@
 package efub.assignment.community.messageRoom.dto;
 
 import efub.assignment.community.member.domain.Member;
-import efub.assignment.community.messageRoom.domain.Message;
 import efub.assignment.community.messageRoom.domain.MessageRoom;
 import lombok.AccessLevel;
 import lombok.Builder;
