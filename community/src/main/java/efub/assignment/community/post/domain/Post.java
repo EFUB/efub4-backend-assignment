@@ -63,8 +63,9 @@ public class Post extends BaseTimeEntity {
         this.writerOpen = writerOpen;
     }
 
-    public void update(PostUpdateDto dto){
-        this.title = dto.getTitle();
-        this.content = dto.getContent();
+    public void update(String title, String content, String writerOpen){
+        this.title = title;
+        this.content = content;
+        this.writerOpen = writerOpen;
     }
 }

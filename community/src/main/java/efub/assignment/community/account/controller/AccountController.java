@@ -19,30 +19,28 @@ public class AccountController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public AccountResponseDto signUp(@RequestBody @Valid final SignUpRequestDto requestDto){
-        Long id = accountService.signUp(requestDto);
-        Account findAccount = accountService.findAccountById(id);
-        return AccountResponseDto.from(findAccount);
+        Account account = accountService.signUp(requestDto);
+        return AccountResponseDto.from(account);
     }
 
     @GetMapping("/{account_id}")
     @ResponseStatus(value = HttpStatus.OK)
     public AccountResponseDto getAccount(@PathVariable Long account_id){
-        Account findAccount = accountService.findAccountById(account_id);
-        return AccountResponseDto.from(findAccount);
+        Account account = accountService.findAccountById(account_id);
+        return AccountResponseDto.from(account);
     }
 
     @PatchMapping("/profile/{account_id}")
     @ResponseStatus(value = HttpStatus.OK)
     public AccountResponseDto update(@PathVariable final Long account_id, @RequestBody @Valid final AccountUpdateRequestDto requestDto){
-        Long id = accountService.update(account_id,requestDto);
-        Account findAccount = accountService.findAccountById(id);
-        return AccountResponseDto.from(findAccount);
+        Account account = accountService.updateAccount(account_id,requestDto);
+        return AccountResponseDto.from(account);
     }
 
     @PatchMapping("/{account_id}")
     @ResponseStatus(value = HttpStatus.OK)
     public String withdraw(@PathVariable Long account_id){
         accountService.withdraw(account_id);
-        return "삭제가 완료되었습니다.";
+        return "계쩡 비활성화가 완료되었습니다.";
     }
 }

@@ -6,8 +6,7 @@ import efub.assignment.community.account.service.AccountService;
 import efub.assignment.community.board.domain.Board;
 import efub.assignment.community.board.service.BoardService;
 import efub.assignment.community.exception.CustomDeleteException;
-import efub.assignment.community.exception.ErrorCode;
-import efub.assignment.community.post.PostRepository;
+import efub.assignment.community.post.repository.PostRepository;
 import efub.assignment.community.post.domain.Post;
 import efub.assignment.community.post.dto.PostRequestDto;
 import efub.assignment.community.post.dto.PostUpdateDto;
@@ -54,15 +53,15 @@ public class PostService {
         return post;
     }
 
-    public Long updatePost(Long post_id, PostUpdateDto dto){
-        Post post = findPostById(post_id);
-        post.update(dto);
+    public Long updatePost(Long postId, PostUpdateDto dto){
+        Post post = findPostById(postId);
+        post.update(dto.getTitle(), dto.getContent(), dto.getWriterOpen());
         return post.getPostId();
     }
 
-    public void deletePost(Long post_id, Long account_id){
-        Post post = findPostById(post_id);
-        if(account_id!=post.getAccount().getAccountId()){
+    public void deletePost(Long postId, Long accountId){
+        Post post = findPostById(postId);
+        if(accountId!=post.getAccount().getAccountId()){
             throw new CustomDeleteException(PERMISSION_REJECTED_USER);
         }
         postRepository.delete(post);

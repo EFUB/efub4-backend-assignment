@@ -1,4 +1,4 @@
-package efub.assignment.community.post;
+package efub.assignment.community.post.repository;
 
 import efub.assignment.community.account.domain.Account;
 import efub.assignment.community.post.domain.Post;

@@ -3,7 +3,6 @@ package efub.assignment.community.message.service;
 
 import efub.assignment.community.account.domain.Account;
 import efub.assignment.community.account.service.AccountService;
-import efub.assignment.community.board.domain.Board;
 import efub.assignment.community.message.domain.Message;
 import efub.assignment.community.message.dto.MessageRequestDto;
 import efub.assignment.community.message.repository.MessageRepository;

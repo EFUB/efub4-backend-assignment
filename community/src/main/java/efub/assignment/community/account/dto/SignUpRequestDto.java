@@ -4,13 +4,11 @@ import efub.assignment.community.account.domain.Account;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class SignUpRequestDto {
     @NotBlank(message = "이메일은 필수입니다.")
       @Email(message = "유효하지 않은 이메일 형식입니다.")
@@ -30,15 +28,6 @@ public class SignUpRequestDto {
 
     @NotBlank(message = "학번은 필수입니다.")
     private String studentId;
-
-    @Builder
-    public SignUpRequestDto(String email, String password, String nickname, String university, String studentId){
-        this.email = email;
-        this.password = password;
-        this.nickname = nickname;
-        this.university = university;
-        this.studentId = studentId;
-    }
 
     public Account toEntity(){
         return Account.builder()

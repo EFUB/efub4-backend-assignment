@@ -2,7 +2,7 @@ package efub.assignment.community.board.service;
 
 import efub.assignment.community.account.domain.Account;
 import efub.assignment.community.account.service.AccountService;
-import efub.assignment.community.board.BoardRepository;
+import efub.assignment.community.board.repository.BoardRepository;
 import efub.assignment.community.board.domain.Board;
 import efub.assignment.community.board.dto.BoardRequestDto;
 import efub.assignment.community.board.dto.BoardUpdateDto;

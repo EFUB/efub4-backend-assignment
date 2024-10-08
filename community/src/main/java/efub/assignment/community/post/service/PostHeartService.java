@@ -2,7 +2,7 @@ package efub.assignment.community.post.service;
 
 import efub.assignment.community.account.domain.Account;
 import efub.assignment.community.account.service.AccountService;
-import efub.assignment.community.post.PostHeartRepository;
+import efub.assignment.community.post.repository.PostHeartRepository;
 import efub.assignment.community.post.domain.Post;
 import efub.assignment.community.post.domain.PostHeart;
 import lombok.RequiredArgsConstructor;

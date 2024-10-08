@@ -1,9 +1,9 @@
 package efub.assignment.community.account.service;
 
-import efub.assignment.community.account.AccountRepository;
 import efub.assignment.community.account.domain.Account;
 import efub.assignment.community.account.dto.AccountUpdateRequestDto;
 import efub.assignment.community.account.dto.SignUpRequestDto;
+import efub.assignment.community.account.repository.AccountRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +15,11 @@ import org.springframework.stereotype.Service;
 public class AccountService {
     private final AccountRepository accountRepository;
 
-    public Long signUp(SignUpRequestDto requestDto){
+    public Account signUp(SignUpRequestDto requestDto){
         if(existsByEmail(requestDto.getEmail())){
             throw new IllegalArgumentException("이미 존재하는 email입니다."+requestDto.getEmail());
         }
-        Account account = accountRepository.save(requestDto.toEntity());
-        return account.getAccountId();
+        return accountRepository.save(requestDto.toEntity());
     }
 
     @Transactional(readOnly = true)
@@ -45,30 +44,31 @@ public class AccountService {
                 .orElseThrow(()-> new EntityNotFoundException("해당 email을 가진 Account를 찾을 수 없습니다. email="+email));
     }
 
-    public Long update(Long account_id, AccountUpdateRequestDto requestDto){
+    @Transactional(readOnly = true)
+    public Account findAccountByNickname(String name){
+        return accountRepository.findByNickname(name)
+                .orElseThrow(()-> new EntityNotFoundException("해당 nickname를 가진 Account를 찾을 수 없습니다. nickname="+name));
+    }
+
+    public Account updateAccount(Long accountId, AccountUpdateRequestDto requestDto){
         if(existsByEmail(requestDto.getEmail())){ // 변경하려는 이메일이 이미 등록되어 있는지
-            if(!account_id.equals(findAccountByEmail(requestDto.getEmail()).getAccountId())){  // 등록되어있는 이메일이 자신의 계정 이메일이 아니면 IllegalArgumentException "이미 존재하는 email입니다."
+            if(!accountId.equals(findAccountByEmail(requestDto.getEmail()).getAccountId())){  // 등록되어있는 이메일이 자신의 계정 이메일이 아니면 IllegalArgumentException "이미 존재하는 email입니다."
                 throw new IllegalArgumentException("이미 존재하는 email입니다."+requestDto.getEmail());
             }
         }
-        Account account = findAccountById(account_id);
+        Account account = findAccountById(accountId);
         if(account.getNickname() != requestDto.getNickname()){
             if(existsByNickname(requestDto.getNickname())){
                 throw new IllegalArgumentException("이미 존재하는 nickname입니다."+requestDto.getNickname());
             }
         }
         account.updateAccount(requestDto.getEmail(),requestDto.getNickname(),requestDto.getPassword());
-        return account.getAccountId();
+        return account;
     }
 
-    public void withdraw(Long account_id){
-        Account account = findAccountById(account_id);
+    public void withdraw(Long accountId){
+        Account account = findAccountById(accountId);
         account.withdrawAccount();
     }
 
-    @Transactional(readOnly = true) //닉네임으로 해당 계정 찾는 메소드
-    public Account findAccountByNickname(String name){
-        return accountRepository.findByNickname(name)
-                .orElseThrow(()-> new EntityNotFoundException("해당 nickname를 가진 Account를 찾을 수 없습니다. nickname="+name));
-    }
 }

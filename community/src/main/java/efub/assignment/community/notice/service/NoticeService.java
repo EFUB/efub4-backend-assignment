@@ -2,12 +2,9 @@ package efub.assignment.community.notice.service;
 
 import efub.assignment.community.account.domain.Account;
 import efub.assignment.community.account.service.AccountService;
-import efub.assignment.community.board.domain.Board;
-import efub.assignment.community.comment.domain.Comment;
 import efub.assignment.community.notice.domain.Notice;
 import efub.assignment.community.notice.repository.NoticeRepository;
 import efub.assignment.community.post.domain.Post;
-import efub.assignment.community.post.dto.PostRequestDto;
 import efub.assignment.community.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package efub.assignment.community.account;
+package efub.assignment.community.account.repository;
 
 import efub.assignment.community.account.domain.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
